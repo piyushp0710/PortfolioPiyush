@@ -2,31 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Theme tokens ───────────────────────────────────────────── */
-:root {
-  --bg1:       #f8fafc;
-  --bg2:       #f1f5f9;
-  --bgcard:    #ffffff;
-  --border1:   rgba(0,0,0,0.08);
-  --border2:   rgba(0,0,0,0.13);
-  --surface:   rgba(0,0,0,0.04);
-  --text1:     #0f172a;
-  --text2:     #475569;
-  --text3:     #374151;
-}
-
-.dark {
-  --bg1:       #080810;
-  --bg2:       #0e0e1a;
-  --bgcard:    #13131f;
-  --border1:   rgba(255,255,255,0.05);
-  --border2:   rgba(255,255,255,0.10);
-  --surface:   rgba(255,255,255,0.05);
-  --text1:     #ffffff;
-  --text2:     #9ca3af;
-  --text3:     #d1d5db;
-}
-
 @layer base {
   * {
     margin: 0;
@@ -87,40 +62,6 @@
   .text-muted {
     color: #6b7280;
   }
-}
-
-/* ── Light mode text + border overrides ─────────────────────── */
-html:not(.dark) .text-white {
-  color: #0f172a;
-}
-html:not(.dark) .text-gray-300 {
-  color: #374151;
-}
-html:not(.dark) .text-gray-400 {
-  color: #4b5563;
-}
-html:not(.dark) .border-white\/5,
-html:not(.dark) .border-white\/10 {
-  border-color: #e5e7eb;
-}
-html:not(.dark) .bg-white\/5 {
-  background-color: rgba(0, 0, 0, 0.04);
-}
-html:not(.dark) .hover\:bg-white\/5:hover,
-html:not(.dark) .hover\:bg-white\/10:hover {
-  background-color: rgba(0, 0, 0, 0.06);
-}
-html:not(.dark) .placeholder-gray-600::placeholder {
-  color: #9ca3af;
-}
-/* Keep text white on gradient/colored buttons */
-html:not(.dark) .bg-gradient-to-r .text-white,
-html:not(.dark) [class*="from-blue"] .text-white,
-html:not(.dark) [class*="from-violet"] .text-white {
-  color: #ffffff;
-}
-html:not(.dark) .bg-gradient-to-r {
-  color: #ffffff;
 }
 
 /* Custom scrollbar */

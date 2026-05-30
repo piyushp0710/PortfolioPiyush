@@ -27,7 +27,7 @@ export default function Experience() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="experience" className="py-24 bg-[var(--bg2)]">
+    <section id="experience" className="py-24 bg-[#0e0e1a]">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Work Experience"
@@ -52,7 +52,7 @@ export default function Experience() {
                 <div className="w-2 h-2 rounded-full bg-white" />
               </div>
 
-              <div className="p-6 rounded-2xl bg-[var(--bgcard)] border border-white/5 hover:border-blue-500/20 transition-all group">
+              <div className="p-6 rounded-2xl bg-[#13131f] border border-white/5 hover:border-blue-500/20 transition-all group">
                 {/* Header */}
                 <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
                   <div>

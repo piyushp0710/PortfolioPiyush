@@ -46,7 +46,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[var(--bg1)]">
+    <section id="contact" className="py-24 bg-[#080810]">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Get In Touch"
@@ -77,7 +77,7 @@ export default function Contact() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-[var(--bgcard)] border border-white/5 hover:border-blue-500/20 transition-all group"
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-[#13131f] border border-white/5 hover:border-blue-500/20 transition-all group"
                 >
                   <div className={`w-11 h-11 rounded-xl ${link.bg} flex items-center justify-center flex-shrink-0`}>
                     <link.icon size={20} className={link.color} />
@@ -100,13 +100,13 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             {sent ? (
-              <div className="p-10 rounded-2xl bg-[var(--bgcard)] border border-green-500/20 text-center">
+              <div className="p-10 rounded-2xl bg-[#13131f] border border-green-500/20 text-center">
                 <div className="text-4xl mb-4">✅</div>
                 <h3 className="text-xl font-bold text-white mb-2">Message Sent!</h3>
                 <p className="text-gray-400">Thanks for reaching out. I'll get back to you within 24 hours.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="p-6 rounded-2xl bg-[var(--bgcard)] border border-white/5 space-y-5">
+              <form onSubmit={handleSubmit} className="p-6 rounded-2xl bg-[#13131f] border border-white/5 space-y-5">
                 <div>
                   <label className="block text-sm text-gray-400 mb-2 font-medium">Your Name</label>
                   <div className="relative">

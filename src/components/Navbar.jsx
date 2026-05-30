@@ -24,7 +24,7 @@ export default function Navbar({ theme, toggleTheme }) {
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-white/90 dark:bg-[var(--bg1)]/80 backdrop-blur-xl border-b border-white/5 shadow-xl'
+            ? 'bg-[#080810]/80 backdrop-blur-xl border-b border-white/5 shadow-xl'
             : 'bg-transparent'
         }`}
         initial={{ y: -80 }}
@@ -88,7 +88,7 @@ export default function Navbar({ theme, toggleTheme }) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="fixed top-16 left-0 right-0 z-40 bg-white/95 dark:bg-[var(--bg1)]/95 backdrop-blur-xl border-b border-white/5 md:hidden"
+            className="fixed top-16 left-0 right-0 z-40 bg-[#080810]/95 backdrop-blur-xl border-b border-white/5 md:hidden"
           >
             <ul className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
               {links.map((link) => (

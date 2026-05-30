@@ -65,25 +65,13 @@ const colorMap = {
   violet: { bar: 'from-violet-500 to-violet-400', bg: 'bg-violet-500/10', text: 'text-violet-400', border: 'border-violet-500/20' },
 };
 
-function SkillBar({ name, level, Icon, color, delay }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
+function SkillBar({ name, Icon, color }) {
   const c = colorMap[color];
 
   return (
-    <div ref={ref} className="space-y-2">
-      <div className="flex items-center gap-2">
-        {Icon && <Icon size={15} className={c.text} />}
-        <span className="text-sm text-gray-300 font-medium">{name}</span>
-      </div>
-      <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
-        <motion.div
-          className={`h-full rounded-full bg-gradient-to-r ${c.bar}`}
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${level}%` } : {}}
-          transition={{ duration: 0.8, delay, ease: 'easeOut' }}
-        />
-      </div>
+    <div className="flex items-center gap-2 py-1">
+      {Icon && <Icon size={15} className={c.text} />}
+      <span className="text-sm text-gray-300 font-medium">{name}</span>
     </div>
   );
 }

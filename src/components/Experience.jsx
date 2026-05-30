@@ -8,7 +8,7 @@ const experiences = [
     role: 'Associate Software Engineer',
     company: 'Cosmofeed',
     type: 'Full-time',
-    duration: 'Jul 2024 – Present',
+    duration: 'Aug 2025 – Present',
     location: 'Remote, India',
     points: [
       'Develop and maintain full-stack web features using React.js, Node.js, Express.js, and MongoDB in an agile environment.',

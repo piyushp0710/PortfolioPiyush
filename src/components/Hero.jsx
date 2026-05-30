@@ -44,7 +44,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#080810]"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[var(--bg1)]"
     >
       {/* Background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
@@ -181,14 +181,14 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -top-4 -right-4 px-3 py-1.5 rounded-lg bg-[#13131f] border border-white/10 text-xs font-mono text-blue-400 shadow-lg"
+                className="absolute -top-4 -right-4 px-3 py-1.5 rounded-lg bg-[var(--bgcard)] border border-white/10 text-xs font-mono text-blue-400 shadow-lg"
               >
                 400+ DSA ✓
               </motion.div>
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity }}
-                className="absolute -bottom-4 -left-4 px-3 py-1.5 rounded-lg bg-[#13131f] border border-white/10 text-xs font-mono text-violet-400 shadow-lg"
+                className="absolute -bottom-4 -left-4 px-3 py-1.5 rounded-lg bg-[var(--bgcard)] border border-white/10 text-xs font-mono text-violet-400 shadow-lg"
               >
                 MERN Stack ⚡
               </motion.div>

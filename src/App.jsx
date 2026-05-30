@@ -36,7 +36,7 @@ export default function App() {
   const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#080810] text-white' : 'bg-gray-50 text-gray-900'}`}>
+    <div className="min-h-screen bg-[var(--bg1)] text-[var(--text1)]">
       <AnimatePresence>{loading && <LoadingScreen />}</AnimatePresence>
 
       {!loading && (

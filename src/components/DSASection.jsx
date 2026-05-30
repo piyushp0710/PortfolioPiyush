@@ -80,7 +80,7 @@ export default function DSASection() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="dsa" className="py-24 bg-[#0e0e1a]">
+    <section id="dsa" className="py-24 bg-[var(--bg2)]">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Competitive Programming"
@@ -139,7 +139,7 @@ export default function DSASection() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.5 + i * 0.1 }}
-              className="p-5 rounded-2xl bg-[#13131f] border border-white/5 flex items-start gap-4"
+              className="p-5 rounded-2xl bg-[var(--bgcard)] border border-white/5 flex items-start gap-4"
             >
               <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
                 <a.icon size={18} className="text-blue-400" />

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 export default function LoadingScreen() {
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#080810]"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-[var(--bg1)]"
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >

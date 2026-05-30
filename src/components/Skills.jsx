@@ -70,7 +70,7 @@ export default function Skills() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="skills" className="py-24 bg-[#080810]">
+    <section id="skills" className="py-24 bg-[var(--bg1)]">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Technical Skills"
@@ -87,7 +87,7 @@ export default function Skills() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: gi * 0.1 }}
-                className="p-6 rounded-2xl bg-[#13131f] border border-white/5"
+                className="p-6 rounded-2xl bg-[var(--bgcard)] border border-white/5"
               >
                 <div className="flex items-center gap-3 mb-5">
                   <div className={`w-9 h-9 rounded-xl ${c.bg} flex items-center justify-center`}>
@@ -120,7 +120,7 @@ export default function Skills() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.5 }}
-          className="p-6 rounded-2xl bg-[#13131f] border border-white/5"
+          className="p-6 rounded-2xl bg-[var(--bgcard)] border border-white/5"
         >
           <h3 className="text-white font-semibold mb-5 flex items-center gap-2">
             <FiCode size={16} className="text-blue-400" />

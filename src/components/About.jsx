@@ -29,7 +29,7 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="py-24 bg-[#0e0e1a]">
+    <section id="about" className="py-24 bg-[var(--bg2)]">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="About Me"
@@ -86,7 +86,7 @@ export default function About() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.3 + i * 0.1 }}
-                className="p-6 rounded-2xl bg-[#13131f] border border-white/5 hover:border-blue-500/20 transition-all group"
+                className="p-6 rounded-2xl bg-[var(--bgcard)] border border-white/5 hover:border-blue-500/20 transition-all group"
               >
                 <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-all">
                   <Icon size={20} className="text-blue-400" />

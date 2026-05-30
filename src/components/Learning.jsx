@@ -52,7 +52,7 @@ export default function Learning() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="learning" className="py-24 bg-[#080810]">
+    <section id="learning" className="py-24 bg-[var(--bg1)]">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Growth Mindset"
@@ -69,7 +69,7 @@ export default function Learning() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: ti * 0.15 }}
-                className="p-6 rounded-2xl bg-[#13131f] border border-white/5"
+                className="p-6 rounded-2xl bg-[var(--bgcard)] border border-white/5"
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${c.badge} border`}>

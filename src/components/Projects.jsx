@@ -82,7 +82,7 @@ export default function Projects() {
   const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active);
 
   return (
-    <section id="projects" className="py-24 bg-[#080810]">
+    <section id="projects" className="py-24 bg-[var(--bg1)]">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="My Work"
@@ -120,7 +120,7 @@ export default function Projects() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ delay: inView ? i * 0.07 : 0 }}
-                className="group relative p-6 rounded-2xl bg-[#13131f] border border-white/5 hover:border-blue-500/20 transition-all overflow-hidden"
+                className="group relative p-6 rounded-2xl bg-[var(--bgcard)] border border-white/5 hover:border-blue-500/20 transition-all overflow-hidden"
               >
                 {/* Background gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />

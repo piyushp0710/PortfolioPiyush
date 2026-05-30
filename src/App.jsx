@@ -12,7 +12,6 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import DSASection from './components/DSASection';
 import Learning from './components/Learning';
-import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -53,7 +52,6 @@ export default function App() {
             <Projects />
             <DSASection />
             <Learning />
-            <Testimonials />
             <Contact />
           </main>
 

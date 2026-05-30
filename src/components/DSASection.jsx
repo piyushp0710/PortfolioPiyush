@@ -98,7 +98,7 @@ export default function DSASection() {
         >
           <div className="inline-flex flex-col items-center p-10 rounded-3xl bg-gradient-to-br from-blue-600/10 to-violet-600/10 border border-blue-500/20">
             <div className="text-8xl font-black gradient-text mb-2">
-              {inView && <AnimatedCounter target="300" inView={inView} />}
+              {inView && <AnimatedCounter target="400" inView={inView} />}
             </div>
             <div className="text-xl text-gray-300 font-medium">Problems Solved</div>
             <div className="text-sm text-gray-500 mt-1">LeetCode • CodeChef • Codeforces • GFG</div>

@@ -5,7 +5,7 @@ import { FiCode, FiCpu, FiTarget, FiTrendingUp } from 'react-icons/fi';
 
 const stats = [
   { value: '1+', label: 'Year Experience', icon: FiTrendingUp },
-  { value: '300+', label: 'DSA Problems', icon: FiTarget },
+  { value: '400+', label: 'DSA Problems', icon: FiTarget },
   { value: '10+', label: 'Projects Built', icon: FiCode },
   { value: '4', label: 'Coding Platforms', icon: FiCpu },
 ];
@@ -52,7 +52,7 @@ export default function About() {
             </p>
             <p className="text-gray-400 leading-relaxed">
               My journey into software engineering is backed by a strong foundation in
-              Data Structures & Algorithms — having solved <span className="text-blue-400 font-semibold">300+ problems</span> across
+              Data Structures & Algorithms — having solved <span className="text-blue-400 font-semibold">400+ problems</span> across
               LeetCode, CodeChef, Codeforces, and GeeksforGeeks.
             </p>
             <p className="text-gray-400 leading-relaxed">

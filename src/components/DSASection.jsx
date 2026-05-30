@@ -25,7 +25,7 @@ const platforms = [
     bg: 'bg-amber-500/10',
     border: 'border-amber-500/20',
     text: 'text-amber-400',
-    link: 'https://www.codechef.com/',
+    link: 'https://www.codechef.com/users/piyushp_2003',
   },
   {
     name: 'Codeforces',
@@ -36,7 +36,7 @@ const platforms = [
     bg: 'bg-blue-500/10',
     border: 'border-blue-500/20',
     text: 'text-blue-400',
-    link: 'https://codeforces.com/',
+    link: 'https://codeforces.com/profile/Piyush_pandey',
   },
   {
     name: 'GeeksforGeeks',
@@ -47,7 +47,7 @@ const platforms = [
     bg: 'bg-green-500/10',
     border: 'border-green-500/20',
     text: 'text-green-400',
-    link: 'https://www.geeksforgeeks.org/',
+    link: 'https://www.geeksforgeeks.org/profile/piyushpandeyrahana',
   },
 ];
 

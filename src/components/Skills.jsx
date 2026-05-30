@@ -72,12 +72,9 @@ function SkillBar({ name, level, Icon, color, delay }) {
 
   return (
     <div ref={ref} className="space-y-2">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          {Icon && <Icon size={15} className={c.text} />}
-          <span className="text-sm text-gray-300 font-medium">{name}</span>
-        </div>
-        <span className="text-xs font-mono text-gray-500">{level}%</span>
+      <div className="flex items-center gap-2">
+        {Icon && <Icon size={15} className={c.text} />}
+        <span className="text-sm text-gray-300 font-medium">{name}</span>
       </div>
       <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
         <motion.div

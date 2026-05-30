@@ -7,8 +7,8 @@ const contactLinks = [
   {
     icon: FiMail,
     label: 'Email',
-    value: 'piyush.pandey@cosmofeed.com',
-    href: 'mailto:piyush.pandey@cosmofeed.com',
+    value: 'piyushpandey.rahana@gmail.com',
+    href: 'mailto:piyushpandey.rahana@gmail.com',
     color: 'text-blue-400',
     bg: 'bg-blue-500/10',
   },

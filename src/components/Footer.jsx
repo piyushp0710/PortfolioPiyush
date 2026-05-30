@@ -5,7 +5,7 @@ const socials = [
   { icon: FiGithub, href: 'https://github.com/piyushp0710', label: 'GitHub' },
   { icon: FiLinkedin, href: 'https://www.linkedin.com/in/piyush-pandey-640185228/', label: 'LinkedIn' },
   { icon: SiLeetcode, href: 'https://leetcode.com/', label: 'LeetCode' },
-  { icon: FiMail, href: 'mailto:piyush.pandey@cosmofeed.com', label: 'Email' },
+  { icon: FiMail, href: 'mailto:piyushpandey.rahana@gmail.com', label: 'Email' },
 ];
 
 const navLinks = ['About', 'Skills', 'Experience', 'Projects', 'DSA', 'Contact'];

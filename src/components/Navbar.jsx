@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 const links = ['About', 'Skills', 'Experience', 'Projects', 'DSA', 'Contact'];
 
-export default function Navbar({ theme, toggleTheme }) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -55,14 +55,6 @@ export default function Navbar({ theme, toggleTheme }) {
           </ul>
 
           <div className="flex items-center gap-3">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all"
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <FiSun size={18} /> : <FiMoon size={18} />}
-            </button>
-
             <a
               href="/resume.pdf"
               download

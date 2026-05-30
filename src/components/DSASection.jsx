@@ -14,7 +14,7 @@ const platforms = [
     bg: 'bg-orange-500/10',
     border: 'border-orange-500/20',
     text: 'text-orange-400',
-    link: 'https://leetcode.com/',
+    link: 'https://leetcode.com/u/Piyushpandey123/',
   },
   {
     name: 'CodeChef',

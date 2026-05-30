@@ -15,8 +15,8 @@ const contactLinks = [
   {
     icon: FiLinkedin,
     label: 'LinkedIn',
-    value: 'linkedin.com/in/piyushpandey',
-    href: 'https://linkedin.com/in/piyushpandey',
+    value: 'linkedin.com/in/piyush-pandey-640185228',
+    href: 'https://www.linkedin.com/in/piyush-pandey-640185228/',
     color: 'text-blue-400',
     bg: 'bg-blue-500/10',
   },

@@ -5,7 +5,7 @@ import {
   SiJavascript, SiHtml5, SiTailwindcss,
   SiGit, SiGithub, SiPostman, SiDocker,
 } from 'react-icons/si';
-import { FiLayers, FiDatabase, FiCpu, FiTerminal } from 'react-icons/fi';
+import { FiLayers, FiDatabase, FiCpu, FiTerminal, FiCode } from 'react-icons/fi';
 import { SectionHeader } from './About';
 
 const skillGroups = [
@@ -14,11 +14,11 @@ const skillGroups = [
     icon: FiLayers,
     color: 'blue',
     skills: [
-      { name: 'React.js', icon: SiReact, level: 90 },
-      { name: 'JavaScript', icon: SiJavascript, level: 88 },
-      { name: 'Tailwind CSS', icon: SiTailwindcss, level: 85 },
-      { name: 'HTML5', icon: SiHtml5, level: 90 },
-      { name: 'CSS3', icon: null, level: 85 },
+      { name: 'React.js', icon: SiReact },
+      { name: 'JavaScript', icon: SiJavascript },
+      { name: 'Tailwind CSS', icon: SiTailwindcss },
+      { name: 'HTML5', icon: SiHtml5 },
+      { name: 'CSS3', icon: null },
     ],
   },
   {
@@ -26,8 +26,8 @@ const skillGroups = [
     icon: FiCpu,
     color: 'violet',
     skills: [
-      { name: 'Node.js', icon: SiNodedotjs, level: 85 },
-      { name: 'Express.js', icon: SiExpress, level: 82 },
+      { name: 'Node.js', icon: SiNodedotjs },
+      { name: 'Express.js', icon: SiExpress },
     ],
   },
   {
@@ -35,8 +35,8 @@ const skillGroups = [
     icon: FiDatabase,
     color: 'blue',
     skills: [
-      { name: 'MongoDB', icon: SiMongodb, level: 80 },
-      { name: 'MySQL', icon: SiMysql, level: 72 },
+      { name: 'MongoDB', icon: SiMongodb },
+      { name: 'MySQL', icon: SiMysql },
     ],
   },
   {
@@ -44,10 +44,10 @@ const skillGroups = [
     icon: FiTerminal,
     color: 'violet',
     skills: [
-      { name: 'Git', icon: SiGit, level: 85 },
-      { name: 'GitHub', icon: SiGithub, level: 85 },
-      { name: 'Postman', icon: SiPostman, level: 80 },
-      { name: 'Docker', icon: SiDocker, level: 45 },
+      { name: 'Git', icon: SiGit },
+      { name: 'GitHub', icon: SiGithub },
+      { name: 'Postman', icon: SiPostman },
+      { name: 'Docker', icon: SiDocker },
     ],
   },
 ];
@@ -61,20 +61,9 @@ const concepts = [
 ];
 
 const colorMap = {
-  blue: { bar: 'from-blue-500 to-blue-400', bg: 'bg-blue-500/10', text: 'text-blue-400', border: 'border-blue-500/20' },
-  violet: { bar: 'from-violet-500 to-violet-400', bg: 'bg-violet-500/10', text: 'text-violet-400', border: 'border-violet-500/20' },
+  blue: { bg: 'bg-blue-500/10', text: 'text-blue-400', border: 'border-blue-500/20', pill: 'bg-blue-500/10 border-blue-500/20 text-blue-300' },
+  violet: { bg: 'bg-violet-500/10', text: 'text-violet-400', border: 'border-violet-500/20', pill: 'bg-violet-500/10 border-violet-500/20 text-violet-300' },
 };
-
-function SkillBar({ name, Icon, color }) {
-  const c = colorMap[color];
-
-  return (
-    <div className="flex items-center gap-2 py-1">
-      {Icon && <Icon size={15} className={c.text} />}
-      <span className="text-sm text-gray-300 font-medium">{name}</span>
-    </div>
-  );
-}
 
 export default function Skills() {
   const ref = useRef(null);
@@ -89,7 +78,7 @@ export default function Skills() {
           subtitle="Technologies I use to build fast, scalable, and maintainable applications."
         />
 
-        <div ref={ref} className="grid md:grid-cols-2 gap-6 mb-12">
+        <div ref={ref} className="grid md:grid-cols-2 gap-6 items-start mb-12">
           {skillGroups.map((group, gi) => {
             const c = colorMap[group.color];
             return (
@@ -100,22 +89,25 @@ export default function Skills() {
                 transition={{ delay: gi * 0.1 }}
                 className="p-6 rounded-2xl bg-[#13131f] border border-white/5"
               >
-                <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-3 mb-5">
                   <div className={`w-9 h-9 rounded-xl ${c.bg} flex items-center justify-center`}>
                     <group.icon size={18} className={c.text} />
                   </div>
                   <h3 className="font-semibold text-white">{group.label}</h3>
                 </div>
-                <div className="space-y-4">
+
+                <div className="flex flex-wrap gap-2">
                   {group.skills.map((s, si) => (
-                    <SkillBar
+                    <motion.span
                       key={s.name}
-                      name={s.name}
-                      level={s.level}
-                      Icon={s.icon}
-                      color={group.color}
-                      delay={0.2 + si * 0.1}
-                    />
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={inView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ delay: 0.2 + gi * 0.1 + si * 0.05 }}
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium border ${c.pill}`}
+                    >
+                      {s.icon && <s.icon size={13} />}
+                      {s.name}
+                    </motion.span>
                   ))}
                 </div>
               </motion.div>
@@ -131,16 +123,16 @@ export default function Skills() {
           className="p-6 rounded-2xl bg-[#13131f] border border-white/5"
         >
           <h3 className="text-white font-semibold mb-5 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-blue-400" />
+            <FiCode size={16} className="text-blue-400" />
             Core Concepts
           </h3>
           <div className="flex flex-wrap gap-2">
-            {concepts.map((c) => (
+            {concepts.map((concept) => (
               <span
-                key={c}
+                key={concept}
                 className="px-3 py-1.5 rounded-lg text-sm bg-white/5 border border-white/5 text-gray-300 hover:border-blue-500/30 hover:text-blue-300 transition-all cursor-default"
               >
-                {c}
+                {concept}
               </span>
             ))}
           </div>

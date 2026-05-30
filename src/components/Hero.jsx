@@ -96,7 +96,7 @@ export default function Hero() {
               className="text-gray-400 text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10"
             >
               Associate Software Engineer with <span className="text-white font-medium">1+ year</span> of professional experience
-              building full-stack web applications. <span className="text-white font-medium">400+ DSA problems</span> solved.
+              building full-stack web applications. <span className="text-white font-medium">300+ DSA problems</span> solved.
               Currently exploring AI Agents & RAG systems.
             </motion.p>
 
@@ -183,7 +183,7 @@ export default function Hero() {
                 transition={{ duration: 3, repeat: Infinity }}
                 className="absolute -top-4 -right-4 px-3 py-1.5 rounded-lg bg-[#13131f] border border-white/10 text-xs font-mono text-blue-400 shadow-lg"
               >
-                400+ DSA ✓
+                300+ DSA ✓
               </motion.div>
               <motion.div
                 animate={{ y: [0, 8, 0] }}

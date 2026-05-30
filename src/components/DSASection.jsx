@@ -8,7 +8,7 @@ const platforms = [
   {
     name: 'LeetCode',
     icon: SiLeetcode,
-    problems: '200+',
+    problems: '50+',
     handle: '@piyushpandey',
     color: 'from-orange-500 to-yellow-500',
     bg: 'bg-orange-500/10',
@@ -19,7 +19,7 @@ const platforms = [
   {
     name: 'CodeChef',
     icon: SiCodechef,
-    problems: '80+',
+    problems: '150+',
     handle: '@piyushp',
     color: 'from-amber-600 to-orange-600',
     bg: 'bg-amber-500/10',
@@ -30,7 +30,7 @@ const platforms = [
   {
     name: 'Codeforces',
     icon: SiCodeforces,
-    problems: '70+',
+    problems: '50+',
     handle: '@piyushp',
     color: 'from-blue-500 to-cyan-500',
     bg: 'bg-blue-500/10',
@@ -98,7 +98,7 @@ export default function DSASection() {
         >
           <div className="inline-flex flex-col items-center p-10 rounded-3xl bg-gradient-to-br from-blue-600/10 to-violet-600/10 border border-blue-500/20">
             <div className="text-8xl font-black gradient-text mb-2">
-              {inView && <AnimatedCounter target="400" inView={inView} />}
+              {inView && <AnimatedCounter target="300" inView={inView} />}
             </div>
             <div className="text-xl text-gray-300 font-medium">Problems Solved</div>
             <div className="text-sm text-gray-500 mt-1">LeetCode • CodeChef • Codeforces • GFG</div>

@@ -95,7 +95,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-gray-400 text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10"
             >
-              Associate Software Engineer with <span className="text-white font-medium">1+ year</span> of professional experience
+              Software Development Engineer with <span className="text-white font-medium">1+ year</span> of professional experience
               building full-stack web applications. <span className="text-white font-medium">400+ DSA problems</span> solved.
               Currently exploring AI Agents & RAG systems.
             </motion.p>

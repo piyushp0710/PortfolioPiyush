@@ -10,7 +10,7 @@
 export const portfolioData = {
   profile: {
     name: 'Piyush Pandey',
-    headline: 'Associate Software Engineer | MERN Stack Developer',
+    headline: 'Software Development Engineer | MERN Stack Developer',
     location: 'Mauganj, Madhya Pradesh, India (current role is remote)',
     summary:
       'Full-stack developer with experience building scalable web applications using React.js, Node.js and MongoDB. ' +
@@ -66,7 +66,7 @@ export const portfolioData = {
 
   experience: [
     {
-      role: 'Associate Software Engineer',
+      role: 'Software Development Engineer',
       company: 'Cosmofeed',
       type: 'Full-time',
       period: 'Aug 2025 – Present',
@@ -216,7 +216,7 @@ export const portfolioData = {
   availability: {
     status: 'Open to opportunities (site).',
     interests: 'Full-time roles, contract work and interesting collaboration opportunities (site).',
-    note: 'Currently employed as an Associate Software Engineer at Cosmofeed; specifics such as notice period, relocation or salary are not stated.',
+    note: 'Currently employed as a Software Development Engineer at Cosmofeed; specifics such as notice period, relocation or salary are not stated.',
     source: 'site',
   },
 

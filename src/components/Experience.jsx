@@ -5,7 +5,7 @@ import { SectionHeader } from './About';
 
 const experiences = [
   {
-    role: 'Associate Software Engineer',
+    role: 'Software Development Engineer',
     company: 'Cosmofeed',
     type: 'Full-time',
     duration: 'Aug 2025 – Present',

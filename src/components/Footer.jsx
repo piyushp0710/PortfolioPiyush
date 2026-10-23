@@ -21,7 +21,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
           <div>
             <div className="text-2xl font-black gradient-text mb-1">Piyush Pandey</div>
-            <div className="text-sm text-gray-500">Associate Software Engineer · MERN Stack Developer</div>
+            <div className="text-sm text-gray-500">Software Development Engineer · MERN Stack Developer</div>
           </div>
           <div className="flex gap-3">
             {socials.map(({ icon: Icon, href, label }) => (

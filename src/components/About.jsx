@@ -46,7 +46,7 @@ export default function About() {
             className="space-y-5"
           >
             <p className="text-gray-300 leading-relaxed text-lg">
-              I'm an <span className="text-white font-semibold">Associate Software Engineer</span> with hands-on
+              I'm a <span className="text-white font-semibold">Software Development Engineer</span> with hands-on
               experience building production-ready MERN stack applications. I focus on writing clean,
               maintainable code that scales.
             </p>

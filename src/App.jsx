@@ -14,6 +14,7 @@ import DSASection from './components/DSASection';
 import Learning from './components/Learning';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ChatWidget from './components/ChatWidget';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -46,6 +47,7 @@ export default function App() {
 
           <Footer />
           <BackToTop />
+          <ChatWidget />
         </>
       )}
     </div>

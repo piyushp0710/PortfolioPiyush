@@ -11,6 +11,9 @@
 
   html {
     scroll-behavior: smooth;
+    /* Hero glows and the long contact email overflow narrow phones (<410px);
+       clip at the viewport so the page and fixed UI (chat panel) fit the screen. */
+    overflow-x: clip;
   }
 
   body {

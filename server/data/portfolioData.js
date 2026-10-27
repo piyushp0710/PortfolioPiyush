@@ -184,8 +184,8 @@ export const portfolioData = {
   dsa: {
     total: '400+ problems solved',
     platforms: [
-      { name: 'LeetCode', solved: '50+', url: 'https://leetcode.com/u/Piyushpandey123/' },
-      { name: 'CodeChef', solved: '150+', url: 'https://www.codechef.com/users/piyushp_2003' },
+      { name: 'LeetCode', solved: '100+', url: 'https://leetcode.com/u/Piyushpandey123/' },
+      { name: 'CodeChef', solved: '180+', url: 'https://www.codechef.com/users/piyushp_2003' },
       { name: 'Codeforces', solved: '50+', url: 'https://codeforces.com/profile/Piyush_pandey' },
       { name: 'GeeksforGeeks', solved: '50+', url: 'https://www.geeksforgeeks.org/profile/piyushpandeyrahana' },
     ],

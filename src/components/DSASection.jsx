@@ -8,7 +8,7 @@ const platforms = [
   {
     name: 'LeetCode',
     icon: SiLeetcode,
-    problems: '50+',
+    problems: '100+',
     handle: '@piyushpandey',
     color: 'from-orange-500 to-yellow-500',
     bg: 'bg-orange-500/10',
@@ -19,7 +19,7 @@ const platforms = [
   {
     name: 'CodeChef',
     icon: SiCodechef,
-    problems: '150+',
+    problems: '180+',
     handle: '@piyushp',
     color: 'from-amber-600 to-orange-600',
     bg: 'bg-amber-500/10',

@@ -1,4 +1,14 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import {
+  clearConversations,
+  deleteConversation,
+  getHistorySnapshot,
+  isHistoryAvailable,
+  loadConversations,
+  makeTitle,
+  saveConversation,
+  subscribeHistory,
+} from '../utils/chatStorage';
 
 export const MAX_MESSAGE_CHARS = 1000;
 const HISTORY_TURNS = 10;
@@ -12,7 +22,7 @@ const WELCOME = {
 };
 
 let nextId = 0;
-const makeId = () => `m${Date.now()}-${nextId++}`;
+const makeId = (prefix = 'm') => `${prefix}${Date.now()}-${nextId++}`;
 
 async function postChat(message, history, signal) {
   let res;
@@ -36,16 +46,46 @@ async function postChat(message, history, signal) {
 }
 
 /**
- * Conversation state for the portfolio chat widget. Kept in memory only:
- * nothing is persisted between page loads.
+ * Conversation state for the portfolio chat widget. The current chat lives in
+ * memory; finished turns are also saved to this browser's history
+ * (utils/chatStorage) so visitors can reopen past conversations.
  */
 export function useChat() {
   const [messages, setMessages] = useState([WELCOME]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null); // { message, retryText }
+  const [conversationId, setConversationId] = useState(() => makeId('c'));
+  const conversations = useSyncExternalStore(subscribeHistory, getHistorySnapshot, () => []);
+  const [historyAvailable] = useState(isHistoryAvailable);
   const controllerRef = useRef(null);
+  const createdAtRef = useRef(0); // set when the first message is saved
+  const savedCountRef = useRef(0);
 
   useEffect(() => () => controllerRef.current?.abort(), []);
+
+  // Persist the current conversation whenever a message is added.
+  useEffect(() => {
+    const turns = messages.filter((m) => m.id !== WELCOME.id);
+    if (!historyAvailable || turns.length === savedCountRef.current) return;
+    savedCountRef.current = turns.length;
+    const firstQuestion = turns.find((m) => m.role === 'user');
+    if (!firstQuestion) return;
+    if (!createdAtRef.current) createdAtRef.current = Date.now();
+    saveConversation({
+      id: conversationId,
+      title: makeTitle(firstQuestion.content),
+      createdAt: createdAtRef.current,
+      updatedAt: Date.now(),
+      messages: turns.map(({ id, role, content }) => ({ id, role, content })),
+    });
+  }, [messages, conversationId, historyAvailable]);
+
+  const abortRequest = useCallback(() => {
+    controllerRef.current?.abort();
+    controllerRef.current = null;
+    setLoading(false);
+    setError(null);
+  }, []);
 
   const request = useCallback(async (text, priorMessages) => {
     controllerRef.current?.abort();
@@ -101,13 +141,56 @@ export function useChat() {
     setMessages((prev) => prev.map((m) => (m.id === id ? { ...m, animate: false } : m)));
   }, []);
 
-  const reset = useCallback(() => {
-    controllerRef.current?.abort();
-    controllerRef.current = null;
-    setLoading(false);
-    setError(null);
+  const startNew = useCallback(() => {
+    abortRequest();
+    setConversationId(makeId('c'));
+    createdAtRef.current = 0;
+    savedCountRef.current = 0;
     setMessages([WELCOME]);
-  }, []);
+  }, [abortRequest]);
 
-  return { messages, loading, error, send, retry, reset, markShown, hasConversation: messages.length > 1 };
+  /** Reopen a saved conversation; the visitor can continue where they left off. */
+  const openConversation = useCallback(
+    (id) => {
+      const saved = loadConversations().find((c) => c.id === id);
+      if (!saved) return false;
+      abortRequest();
+      setConversationId(saved.id);
+      createdAtRef.current = saved.createdAt;
+      savedCountRef.current = saved.messages.length;
+      setMessages([WELCOME, ...saved.messages]);
+      return true;
+    },
+    [abortRequest],
+  );
+
+  const removeConversation = useCallback(
+    (id) => {
+      deleteConversation(id);
+      if (id === conversationId) startNew();
+    },
+    [conversationId, startNew],
+  );
+
+  const clearHistory = useCallback(() => {
+    clearConversations();
+    startNew();
+  }, [startNew]);
+
+  return {
+    messages,
+    loading,
+    error,
+    send,
+    retry,
+    reset: startNew,
+    markShown,
+    hasConversation: messages.length > 1,
+    conversationId,
+    conversations,
+    historyAvailable,
+    openConversation,
+    removeConversation,
+    clearHistory,
+  };
 }

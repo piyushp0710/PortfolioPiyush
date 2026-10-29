@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMessageCircle, FiX, FiSend, FiRefreshCw, FiArrowDown, FiAlertCircle } from 'react-icons/fi';
+import { FiMessageCircle, FiX, FiSend, FiRefreshCw, FiArrowDown, FiAlertCircle, FiClock, FiPlus } from 'react-icons/fi';
 import { useChat, MAX_MESSAGE_CHARS } from '../hooks/useChat';
 import { useTypewriter } from '../hooks/useTypewriter';
 import ChatMarkdown from './ChatMarkdown';
+import ChatHistory from './ChatHistory';
 
 const SUGGESTIONS = [
   'Who is Piyush?',
@@ -60,7 +61,11 @@ export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
   const [atBottom, setAtBottom] = useState(true);
-  const { messages, loading, error, send, retry, reset, markShown, hasConversation } = useChat();
+  const [view, setView] = useState('chat'); // 'chat' | 'history'
+  const {
+    messages, loading, error, send, retry, reset, markShown, hasConversation,
+    conversationId, conversations, historyAvailable, openConversation, removeConversation, clearHistory,
+  } = useChat();
 
   const launcherRef = useRef(null);
   const inputRef = useRef(null);
@@ -71,20 +76,22 @@ export default function ChatWidget() {
     launcherRef.current?.focus();
   }, []);
 
-  // Focus the input when the panel opens.
+  // Focus the input when the panel opens or returns to the chat view.
   useEffect(() => {
-    if (open) inputRef.current?.focus();
-  }, [open]);
+    if (open && view === 'chat') inputRef.current?.focus();
+  }, [open, view]);
 
-  // Escape closes the panel.
+  // Escape leaves the history view first, then closes the panel.
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => {
-      if (e.key === 'Escape') close();
+      if (e.key !== 'Escape') return;
+      if (view === 'history') setView('chat');
+      else close();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [open, close]);
+  }, [open, view, close]);
 
   // Full-screen on phones: stop the page behind from scrolling.
   useEffect(() => {
@@ -100,7 +107,7 @@ export default function ChatWidget() {
   useLayoutEffect(() => {
     const el = listRef.current;
     if (el && atBottom) el.scrollTop = el.scrollHeight;
-  }, [messages, loading, error, atBottom, open]);
+  }, [messages, loading, error, atBottom, open, view]);
 
   const followTyping = useCallback(() => {
     const el = listRef.current;
@@ -128,7 +135,7 @@ export default function ChatWidget() {
     const contentHeight = el.scrollHeight + el.offsetHeight - el.clientHeight;
     el.style.height = `${Math.min(contentHeight, 120)}px`;
     el.style.overflowY = contentHeight > 120 ? 'auto' : 'hidden';
-  }, [input, open]);
+  }, [input, open, view]);
 
   const submit = (text) => {
     if (send(text)) {
@@ -148,7 +155,14 @@ export default function ChatWidget() {
     reset();
     setInput('');
     setAtBottom(true);
+    setView('chat');
     inputRef.current?.focus();
+  };
+
+  const handleOpenConversation = (id) => {
+    if (id !== conversationId) openConversation(id);
+    setAtBottom(true);
+    setView('chat');
   };
 
   const remaining = MAX_MESSAGE_CHARS - input.length;
@@ -179,13 +193,25 @@ export default function ChatWidget() {
               </div>
               <button
                 type="button"
+                onClick={() => setView((v) => (v === 'history' ? 'chat' : 'history'))}
+                aria-pressed={view === 'history'}
+                className={`p-2 rounded-lg transition-all ${FOCUS} ${
+                  view === 'history' ? 'text-white bg-blue-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                }`}
+                aria-label="Chat history"
+                title="Chat history"
+              >
+                <FiClock size={16} />
+              </button>
+              <button
+                type="button"
                 onClick={handleReset}
-                disabled={!hasConversation && !error}
+                disabled={view === 'chat' && !hasConversation && !error}
                 className={`p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 disabled:opacity-40 disabled:hover:bg-transparent transition-all ${FOCUS}`}
                 aria-label="Start a new conversation"
                 title="New conversation"
               >
-                <FiRefreshCw size={16} />
+                <FiPlus size={17} />
               </button>
               <button
                 type="button"
@@ -198,6 +224,20 @@ export default function ChatWidget() {
               </button>
             </div>
 
+            {view === 'history' ? (
+              <div className="flex-1 min-h-0">
+                <ChatHistory
+                  conversations={conversations}
+                  currentId={hasConversation ? conversationId : null}
+                  available={historyAvailable}
+                  onOpen={handleOpenConversation}
+                  onDelete={removeConversation}
+                  onClearAll={clearHistory}
+                  onNewChat={handleReset}
+                />
+              </div>
+            ) : (
+            <>
             {/* Messages */}
             <div className="relative flex-1 min-h-0">
               <div
@@ -312,6 +352,8 @@ export default function ChatWidget() {
                 )}
               </div>
             </form>
+            </>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

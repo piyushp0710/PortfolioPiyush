@@ -30,8 +30,9 @@ describe('aiService.reply', () => {
     assert.equal(model, 'test-model');
     assert.deepEqual(contents.map((c) => c.role), ['user', 'model', 'user']);
     assert.match(config.systemInstruction, /Never invent/);
+    assert.match(config.systemInstruction, /\*\*Label\*\*/); // structured-format rules
     assert.match(config.systemInstruction, /React\.js/); // skills section injected
-    assert.equal(config.maxOutputTokens, 600);
+    assert.equal(config.maxOutputTokens, baseConfig.maxOutputTokens);
     assert.ok(config.abortSignal instanceof AbortSignal);
   });
 

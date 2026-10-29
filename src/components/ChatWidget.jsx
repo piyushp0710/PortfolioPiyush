@@ -2,6 +2,8 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMessageCircle, FiX, FiSend, FiRefreshCw, FiArrowDown, FiAlertCircle } from 'react-icons/fi';
 import { useChat, MAX_MESSAGE_CHARS } from '../hooks/useChat';
+import { useTypewriter } from '../hooks/useTypewriter';
+import ChatMarkdown from './ChatMarkdown';
 
 const SUGGESTIONS = [
   'Who is Piyush?',
@@ -16,25 +18,26 @@ const SUGGESTIONS = [
 const FOCUS =
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e0e1a]';
 
-const LINK_PATTERN = /(https?:\/\/[^\s)]+|[\w.+-]+@[\w-]+\.[\w.-]+)/g;
+// Assistant replies type out word by word. Screen readers get the full text
+// once (sr-only) instead of every intermediate frame.
+function AssistantMessage({ message, onTick, onDone }) {
+  const { shown, done } = useTypewriter(message.content, message.animate, onTick);
 
-// Plain-text rendering with safe auto-linking (no HTML injection).
-function MessageText({ text }) {
-  const clean = text.replace(/\*\*(.+?)\*\*/g, '$1').replace(/^#+\s*/gm, '');
-  return clean.split(LINK_PATTERN).map((part, i) => {
-    if (i % 2 === 0) return part;
-    const url = part.replace(/[.,;:]+$/, '');
-    const trailing = part.slice(url.length);
-    const href = url.includes('@') && !url.startsWith('http') ? `mailto:${url}` : url;
-    return (
-      <span key={i}>
-        <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline underline-offset-2 hover:text-blue-300 break-all">
-          {url}
-        </a>
-        {trailing}
-      </span>
-    );
-  });
+  useEffect(() => {
+    if (done && message.animate) onDone(message.id);
+  }, [done, message.animate, message.id, onDone]);
+
+  return (
+    <>
+      <span className="sr-only">{message.content}</span>
+      <div aria-hidden="true">
+        <ChatMarkdown
+          text={shown}
+          cursor={!done && <span className="inline-block w-1.5 h-4 ml-0.5 align-[-2px] bg-violet-400 animate-pulse" />}
+        />
+      </div>
+    </>
+  );
 }
 
 function TypingIndicator() {
@@ -57,7 +60,7 @@ export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
   const [atBottom, setAtBottom] = useState(true);
-  const { messages, loading, error, send, retry, reset, hasConversation } = useChat();
+  const { messages, loading, error, send, retry, reset, markShown, hasConversation } = useChat();
 
   const launcherRef = useRef(null);
   const inputRef = useRef(null);
@@ -99,6 +102,11 @@ export default function ChatWidget() {
     if (el && atBottom) el.scrollTop = el.scrollHeight;
   }, [messages, loading, error, atBottom, open]);
 
+  const followTyping = useCallback(() => {
+    const el = listRef.current;
+    if (el && atBottom) el.scrollTop = el.scrollHeight;
+  }, [atBottom]);
+
   const handleScroll = () => {
     const el = listRef.current;
     if (el) setAtBottom(el.scrollHeight - el.scrollTop - el.clientHeight < 48);
@@ -115,7 +123,11 @@ export default function ChatWidget() {
     const el = inputRef.current;
     if (!el) return;
     el.style.height = 'auto';
-    el.style.height = `${Math.min(el.scrollHeight, 120)}px`;
+    // scrollHeight excludes the border; add it back (border-box) so an empty
+    // input doesn't overflow by 2px and show a scrollbar.
+    const contentHeight = el.scrollHeight + el.offsetHeight - el.clientHeight;
+    el.style.height = `${Math.min(contentHeight, 120)}px`;
+    el.style.overflowY = contentHeight > 120 ? 'auto' : 'hidden';
   }, [input, open]);
 
   const submit = (text) => {
@@ -199,14 +211,14 @@ export default function ChatWidget() {
                 {messages.map((m) => (
                   <div key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                     <div
-                      className={`max-w-[85%] px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap break-words ${
+                      className={`px-4 py-2.5 text-sm leading-relaxed break-words ${
                         m.role === 'user'
-                          ? 'rounded-2xl rounded-br-md bg-gradient-to-r from-blue-600 to-violet-600 text-white'
-                          : 'rounded-2xl rounded-bl-md bg-[#13131f] border border-white/5 text-gray-200'
+                          ? 'max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-br-md bg-gradient-to-r from-blue-600 to-violet-600 text-white'
+                          : 'max-w-[92%] rounded-2xl rounded-bl-md bg-[#13131f] border border-white/5 text-gray-200'
                       }`}
                     >
                       <span className="sr-only">{m.role === 'user' ? 'You: ' : 'Assistant: '}</span>
-                      {m.role === 'assistant' ? <MessageText text={m.content} /> : m.content}
+                      {m.role === 'assistant' ? <AssistantMessage message={m} onTick={followTyping} onDone={markShown} /> : m.content}
                     </div>
                   </div>
                 ))}

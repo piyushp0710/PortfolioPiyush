@@ -22,7 +22,7 @@ export function getConfig() {
     model: process.env.GEMINI_MODEL?.trim() || DEFAULT_MODEL,
     // MINIMAL keeps latency/cost low; set to "" to omit for models without thinking levels.
     thinkingLevel: process.env.GEMINI_THINKING_LEVEL ?? 'MINIMAL',
-    maxOutputTokens: intFromEnv('CHAT_MAX_OUTPUT_TOKENS', 600),
+    maxOutputTokens: intFromEnv('CHAT_MAX_OUTPUT_TOKENS', 800),
     timeoutMs: intFromEnv('CHAT_TIMEOUT_MS', 20000),
     rateLimitPerMinute: intFromEnv('CHAT_RATE_LIMIT_PER_MINUTE', 8),
     rateLimitPerHour: intFromEnv('CHAT_RATE_LIMIT_PER_HOUR', 60),

@@ -62,7 +62,7 @@ export function useChat() {
     setError(null);
     try {
       const reply = await postChat(text, history, controller.signal);
-      setMessages((prev) => [...prev, { id: makeId(), role: 'assistant', content: reply }]);
+      setMessages((prev) => [...prev, { id: makeId(), role: 'assistant', content: reply, animate: true }]);
     } catch (err) {
       if (controller.signal.aborted && controller.signal.reason !== 'timeout') return; // reset / unmount
       setError({
@@ -96,6 +96,11 @@ export function useChat() {
     request(error.retryText, messages.slice(0, -1));
   }, [error, loading, messages, request]);
 
+  // Typing animation finished: never replay it (e.g. after reopening the panel).
+  const markShown = useCallback((id) => {
+    setMessages((prev) => prev.map((m) => (m.id === id ? { ...m, animate: false } : m)));
+  }, []);
+
   const reset = useCallback(() => {
     controllerRef.current?.abort();
     controllerRef.current = null;
@@ -104,5 +109,5 @@ export function useChat() {
     setMessages([WELCOME]);
   }, []);
 
-  return { messages, loading, error, send, retry, reset, hasConversation: messages.length > 1 };
+  return { messages, loading, error, send, retry, reset, markShown, hasConversation: messages.length > 1 };
 }
